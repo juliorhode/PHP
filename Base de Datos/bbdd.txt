@@ -1,0 +1,89 @@
+ACCESO POR CONSOLA
+******************
+
+ruta de acceso:
+***************
+D:\wamp64\bin\mysql\mysql5.7.24\bin\mysql -u root -p
+
+Crear una base de datos:
+************************
+mysql> create database prueba;
+Query OK, 1 row affected (0.00 sec)
+
+Eliminar base de datos:
+***********************
+mysql> drop database prueba;
+Query OK, 0 rows affected (0.00 sec)
+
+Visualizar bases de datos:
+**************************
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| personal           |
+| sdi                |
+| sql                |
+| sys                |
++--------------------+
+7 rows in set (0.00 sec)
+
+Meternos en una base de datos:
+******************************
+mysql> use usuarios;
+
+Crear tablas:
+**************
+mysql> create table datosusuarios(nombre varchar(30), clave varchar(10));
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> CREATE TABLE DATOSPERSONALES (NIF VARCHAR(10),NOMBRE VARCHAR(15),APELLIDO VARCHAR(20),EDAD INTEGER(2));
+Query OK, 0 rows affected (0.05 sec)
+
+Eliminar tablas:
+*****************
+mysql> drop table datosusuarios;
+Query OK, 0 rows affected (0.00 sec)
+
+Visualizar estructura de una tabla:
+***********************************
+mysql> describe datosusuarios;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| nombre | varchar(30) | YES  |     | NULL    |       |
+| clave  | varchar(10) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> DESCRIBE DATOSPERSONALES;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| NIF      | varchar(10) | YES  |     | NULL    |       |
+| NOMBRE   | varchar(15) | YES  |     | NULL    |       |
+| APELLIDO | varchar(20) | YES  |     | NULL    |       |
+| EDAD     | int(2)      | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+Borrar un campo de una tabla ya creada:
+***************************************
+mysql> alter table datospersonales drop edad;
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Agregar un campo a una tabla ya creada:
+***************************************
+mysql> alter table datospersonales add column edad int(2);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+Insertar un registro en una tabla:
+**********************************
+mysql> insert into datospersonales(nif,nombre,apellido,edad) values("13802982","julio","ferrer",39);
+Query OK, 1 row affected (0.01 sec)
+

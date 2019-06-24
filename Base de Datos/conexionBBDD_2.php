@@ -42,18 +42,20 @@
 	$resultados = mysqli_query($conexion, $sql);
 	
 	//ejecutamos mientras haya registros. aqui mira fila a fila y lo almacena en un array ($fila)
-	echo "<table>";
-	while($fila = mysqli_fetch_row($resultados)){
-		echo "<tr>";
-		//mostramos la informacion
-		for($i = 0; $i < count($fila); $i++){
-			echo "<td>";
-			echo $fila[$i] . "  ";
-			echo "</td>";
+	
+	while($fila = mysqli_fetch_array($resultados,MYSQL_ASSOC)){
+		//con mysqli_fetch_array($resultados,MYSQL_ASSOC) trabajamos con arrays asociativos. Con esto logramos ir directamente al nombre de los campos que queremos mostrar. Con MYSQL_ASSOC es aociativo al nombre del campo, MYSQL_NUM es por indice como el mysqli_fetch_row(), y el MYSQL_BOTH es la combinacion de ambos, para asi trabajar por indice o por asociacion.
+		
+		echo "<table><tr><td>";
+		echo $fila['CODIGO'] . "</td><td>";
+		echo $fila['NOMBRE_ARTICULO'] . "</td><td>";
+		echo $fila['SECCION'] . "</td><td>";
+		echo $fila['PRECIO'] . "</td><td>";
+		echo $fila['PAIS_ORIGEN'] . "</td><td></tr></table>";
+		echo "<br>";
 		}
-		echo "</tr>";
-	}
-	echo "</table>";
+	
+	
 	//cerramos la conexion
 	mysqli_close($conexion);
 	

@@ -3,20 +3,16 @@
 <head>
 <meta charset="utf-8">
 <title>Documento sin título</title>
-<style>
-	table{
-		width: 60%;
-		border: 1px dashed red;
-		margin: auto;
-	}	
-	table td{
-		border: .5px solid rgba(0,0,0,1.00);
-	}
-</style>
 </head>
 
 <body>
 <?php
+	$codigo = $_GET["codigo"];
+	$nombre = $_GET["nombre"];
+	$seccion = $_GET["seccion"];
+	$precio = $_GET["precio"];
+	$pais = $_GET["pais"];
+	
 	require("datosConexion.php");
 	
 	//conectar a la base de datos
@@ -35,31 +31,25 @@
 	//incluya los caracteres latinos
 	mysqli_set_charset($conexion, "utf8");
 	
-	//consulta a la base de datos
-	$sql = "select * from productos where PAIS_ORIGEN = 'CHINA' ";
+	//sentencia sql para insertar
+	$sql = "UPDATE productos set CODIGO = '$codigo', SECCION = '$seccion', NOMBRE_ARTICULO = '$nombre', PRECIO = '$precio', PAIS_ORIGEN = '$pais' where CODIGO = '$codigo'";
+	
 	
 	//ejecutamos la consulta y lo almacenamos en un recordset
 	$resultados = mysqli_query($conexion, $sql);
 	
-	//ejecutamos mientras haya registros. aqui mira fila a fila y lo almacena en un array ($fila)
-	echo "<table>";
-	while($fila = mysqli_fetch_row($resultados)){
-		echo "<tr>";
-		//mostramos la informacion
-		for($i = 0; $i < count($fila); $i++){
-			echo "<td>";
-			echo $fila[$i] . "  ";
-			echo "</td>";
+	if($resultados==false){
+		echo "Error en la consulta";
+	}else{
+		//La funcion mysqli_affected_rows() indica si se ha visto afectada alguna fila en la BBDD
+		if (mysqli_affected_rows($conexion)==0){
+			echo "No hay informacion por actualizar"; 
+		}else{
+			echo "Se ha actualizado " . mysqli_affected_rows($conexion) . " registro";
 		}
-		echo "</tr>";
 	}
-	echo "</table>";
 	//cerramos la conexion
 	mysqli_close($conexion);
-	
-	
-	
-	
 ?>
 </body>
 </html>

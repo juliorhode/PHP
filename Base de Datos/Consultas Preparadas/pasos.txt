@@ -1,0 +1,18 @@
+Ventajas
+---------
+1) Se evitan inyeccion sql
+2) En consultas de tipo INSERT, son mas rapidas y eficientes
+
+Desventajas
+------------
+1) Hay que escribir mas codigo
+
+Pasos
+------
+1) sql = " select * from productos where pais=? "
+2) preparar la consulta con mysqli_prepare() (esto devuelve un objeto de tipo mysqli_stmt)
+	$resultado = mysqli_prepare($onexion,sql)
+3) Se une los parametros a la sentencia sql. De esto se encarga mysqli_stmt_bind_param(). Esto devuelve true o false.
+4) Ejecutar la consulta con mysqli_stmt_execute(). Este devuelve true o false
+5) Con mysqli_stmt_bind_result() conseguimos el resultado de la consulta. Este devuelve true o false
+6) Leer los valores con mysqli_stmt_fetch()

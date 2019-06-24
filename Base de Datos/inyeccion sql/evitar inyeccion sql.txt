@@ -1,0 +1,8 @@
+Evitar la inyeccion sql
+-----------------------
+1) Uso de la funcion mysqli_real_escape_string() --> esto evita caracteres extraños
+2) mysqli_addslashes()
+Se recomienda el uso mysqli_real_escape_string() sobre mysqli_addslashes()
+
+3) Consultas Preparadas
+Esta es la mas robusta y la mas recomendada

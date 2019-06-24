@@ -1,0 +1,15 @@
+PDO (PHP DATA OBGET)
+---
+es una libreria que contiene funciones (parecida a jquery de javascrip).
+
+Es una capa de abstraccion que esta entre codigo php y bbdd.
+
+ventajas
+--------
+permite conectar con diferentes fuentes de datos (oracle,mysql,sql server, access, entre otros)
+
+https://www.php.net/manual/es/book.pdo.php
+
+MARCADORES
+-----------
+Es el uso de arrays asociativos en consultas preparadas

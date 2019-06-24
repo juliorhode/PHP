@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <title>Documento sin título</title>
-<style>
-	table{
-		width: 60%;
-		border: 1px dashed red;
-		margin: auto;
-	}	
-	table td{
-		border: .5px solid rgba(0,0,0,1.00);
-	}
-</style>
+
+
+
 </head>
 
 <body>
+	
 <?php
+	$codigo = $_GET["codigo"];
+	$seccion = $_GET["seccion"];
+	$nombre = $_GET["nombre"];
+	$precio = $_GET["precio"];
+	$fecha = $_GET["fecha"];
+	
 	require("datosConexion.php");
 	
 	//conectar a la base de datos
@@ -35,31 +35,27 @@
 	//incluya los caracteres latinos
 	mysqli_set_charset($conexion, "utf8");
 	
-	//consulta a la base de datos
-	$sql = "select * from productos where PAIS_ORIGEN = 'CHINA' ";
+	//sentencia sql para eliminar
+	$sql = "delete from productos where codigo= '$codigo'";
 	
 	//ejecutamos la consulta y lo almacenamos en un recordset
 	$resultados = mysqli_query($conexion, $sql);
 	
-	//ejecutamos mientras haya registros. aqui mira fila a fila y lo almacena en un array ($fila)
-	echo "<table>";
-	while($fila = mysqli_fetch_row($resultados)){
-		echo "<tr>";
-		//mostramos la informacion
-		for($i = 0; $i < count($fila); $i++){
-			echo "<td>";
-			echo $fila[$i] . "  ";
-			echo "</td>";
+	//
+	if($resultados==false){
+		echo "Error en la consulta";
+	}else{
+		//La funcion mysqli_affected_rows() indica si se ha visto afectada alguna fila en la BBDD
+		if (mysqli_affected_rows($conexion)==0){
+			echo "No hay informacion a eliminar"; 
+		}else{
+			echo "Se ha eliminado " . mysqli_affected_rows($conexion) . " registro";
 		}
-		echo "</tr>";
 	}
-	echo "</table>";
 	//cerramos la conexion
 	mysqli_close($conexion);
-	
-	
-	
-	
 ?>
+	
+
 </body>
 </html>

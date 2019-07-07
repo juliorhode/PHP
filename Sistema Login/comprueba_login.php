@@ -34,10 +34,18 @@
 		//indica el numero de registros que se obtiene de una consulta (devuleve 0 o 1)
 		$numero_registro = $resultado->rowCount();
 		if($numero_registro!=0){
-			echo "<h2>adelante</h2>";
+			//echo "<h2>adelante</h2>";
+			
+			
+			//iniciamos una sesion
+			session_start();
+			$_SESSION["usuario"] = $_POST['login'];
+			
+			header("location:usuariosRegistrados.php");
 		}else{
 			//redirigimos a la pagina de login nuevamente
 			header("location:login.php");
+			
 		}
 	}catch(Exception $e){
 		die("Error: " . $e->getMessage());
